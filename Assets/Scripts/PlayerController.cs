@@ -4,6 +4,16 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
 	public float speed;
+	public GUIText countText;
+	public GUIText winText;
+	private int count;
+
+
+	void Start() {
+		count = 0;
+		SetCountText();
+		winText.text = "";
+	}
 
 	void Update()
 	{}
@@ -20,6 +30,15 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.tag == "Pickup") {
 			other.gameObject.SetActive(false);
+			count ++;
+			SetCountText();
+		}
+	}
+
+	void SetCountText(){
+		countText.text = "Count: " + count.ToString();
+		if (count >= 12) {
+			winText.text = "You Win";
 		}
 	}
 }
